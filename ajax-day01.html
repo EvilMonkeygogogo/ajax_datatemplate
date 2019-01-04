@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax第一天练习</title>
+</head>
+<body>
+    <h1>欢迎来到德莱联盟</h1>
+    <input type="text" class="name">
+    <input type="password" name="" id="mima">
+    <input type="button" name="" id="btn" value="提交">
+
+    <script>
+        
+        let btn = document.querySelector("#btn");
+        //点击提交时间
+        btn.addEventListener("click",function(){
+        var name = document.querySelector(".name");
+        //获取按键按钮
+        
+        var password = document.querySelector("#mima")
+            //获取ajax
+            var ajax = new XMLHttpRequest();
+            //开启
+            ajax.open("get",`http://127.0.0.1:5500/changshi.html`);
+            //监听ajax引擎
+            ajax.onreadystatechange=function(){
+                if(ajax.readyState===4&&ajax.status===200){
+                    var data=JSON.parse( ajax.responseText);
+                    console.log(data);
+                }
+            }
+            ajax.send();
+        });
+
+    </script>
+    
+</body>
+</html>

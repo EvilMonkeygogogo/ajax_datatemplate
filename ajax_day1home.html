@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>第一天作业</title>
+</head>
+<body>
+    <p><input type="text" id="email" ><span id="this"></span></p>
+    
+    <script src="../jq/jquery.js"></script>
+    <script>
+    let font = document.querySelector("#this")
+    let yanzheng=document.querySelector("#email");
+    yanzheng.addEventListener("blur",function(){
+        let ajax=new XMLHttpRequest();
+        ajax.open("get","../changshi.json")
+        ajax.onreadystatechange=function(){
+            if(ajax.readyState===4&&ajax.status===200){
+                let data=JSON.parse(ajax.responseText);
+                console.log(yanzheng)
+                if(data.email==yanzheng.value){
+                    yanzheng.style.border="1px solid green"
+                    font.innerHTML=data.OK
+                }else{
+                    yanzheng.style.border="1px solid red"
+                    font.innerHTML=data.message
+                }
+
+            }
+        }
+        ajax.send();
+    })
+
+    // yanzheng.addEventListener("bulr",function(){
+    //     //先创建个ajax
+    //     let ajax = new XMLHttpRequest();
+    //     //连接ajax和数据库方式
+    //     ajax.open("post","../changshi.json");
+    //     //如果连接正常获取数据
+    //     ajax.onreadystatechange = function(){
+    //         //如果连接正常
+    //         if(ajax.readyState==4&&ajax.status==200){
+    //             let data=JSON.parse(ajax.responseText)
+    //             if(data.email==yanzheng.value){
+    //                 usernameInput.style.border = "2px solid green";
+    //                     usernameInfo.innerHTML = data.message;
+    //                     usernameInfo.style.color = 'green';
+    //             }else{
+    //                 usernameInput.style.border = "2px solid red";
+    //                     usernameInfo.innerHTML = data.message;
+    //                     usernameInfo.style.color = 'red';
+    //             }
+    //         }
+    //     }
+    //     ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+    //     ajax.send();
+    // })
+
+    // $.ajax({
+        //     url: '../server/data.json?username=admin&password=123',
+        //     type: 'get', 
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         console.log('万能方式方式服务器响应回来的数据：', data)
+        //     }
+        // })
+    
+        // $.ajax({
+        //     url: '../server/data.json',
+        //     type: 'post', 
+        //     dataType: 'json',
+        //     data: {
+        //         "username": "guest",
+        //         "password":"321"
+        //     },
+        //     success: function (data) {
+        //         console.log('万能方式方式服务器响应回来的数据：', data)
+        //     }
+        // })
+
+
+
+
+    </script>
+
+</body>
+</html>
